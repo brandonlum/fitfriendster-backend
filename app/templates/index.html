@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header>
+        {% if user.username %}
+            <h1>Hello, {{user.username}}!</h1>
+        {% else %}
+            <h1>Welcome to your FitFriendster!</h1>
+            <h3>Please Login!</h3>
+        {% endif %}
+    </header>
+    <main>
+        {% for post in posts %}
+        <div>
+            <h3>Author: {{post.author.username}}</h3>
+            <p>
+                {{post.body}}
+            </p>
+        </div>
+        {% endfor %}
+
+    </main>
+
+{% endblock %}
