@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/brandonlum/Dropbox/Programming/SE (General Assembly)/seiWork/Projects/Project5/fitfriend-backend/venv"
+VIRTUAL_ENV="/Users/brandonlum/Dropbox/Programming/SE (General Assembly)/seiWork/Projects/Project5/fitfriendster-backend/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
