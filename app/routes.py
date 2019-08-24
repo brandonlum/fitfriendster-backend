@@ -63,7 +63,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Welcome to FitFriendster ' + form.username.data + '!')
+        flash('Welcome to FitFriendster, ' + form.first_name.data + ' ' + form.last_name.data + '!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
