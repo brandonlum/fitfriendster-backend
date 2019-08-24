@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>New Post</h1>
+
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label for="title">{{ form.title.label }}</label><br>
+            {{ form.title(size=32) }} <br>
+            {% for error in form.title.errros %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="body">{{ form.body.label }}</label><br>
+            {{ form.body(cols=50, rows=4) }} <br>
+            {% for error in form.body.errros %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+
+{% endblock %}

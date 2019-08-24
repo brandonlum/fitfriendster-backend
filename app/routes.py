@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, NewPostForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Post
 from werkzeug.urls import url_parse
 from datetime import datetime
 
@@ -11,16 +11,17 @@ from datetime import datetime
 @login_required
 
 def index():
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
+    # posts = [
+    #     {
+    #         'author': {'username': 'John'},
+    #         'body': 'Beautiful day in Portland!'
+    #     },
+    #     {
+    #         'author': {'username': 'Susan'},
+    #         'body': 'The Avengers movie was so cool!'
+    #     }
+    # ]
+    posts = Post.query.all()
     return render_template('index.html', title="Home-Page", posts=posts)
 
 
@@ -62,7 +63,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Welcome to FitFriendster' + form.username.data)
+        flash('Welcome to FitFriendster ' + form.username.data + '!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
@@ -71,10 +72,11 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test Post 1'},
-        {'author': user, 'body': 'Test Post 2'}
-    ]
+    # posts = [
+    #     {'author': user, 'body': 'Test Post 1'},
+    #     {'author': user, 'body': 'Test Post 2'}
+    # ]
+    posts = Post.query.filter_by(user_id=user.id)
     return render_template('user.html', user=user, posts=posts)
 
 
@@ -93,6 +95,20 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile', form=form)
 
+
+@app.route('/new_post', methods=['GET','POST'])
+@login_required
+def new_post():
+    form = NewPostForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        body = form.body.data
+        user_id = current_user.id
+        author = current_user.username
+        db.session.commit()
+        flash('Created new post')
+        return redirect(url_for('index'))
+    return render_template('new_post.html', title='New Post', form=form)
 
 
 @app.before_request
