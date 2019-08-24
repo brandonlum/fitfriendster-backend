@@ -5,3 +5,6 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIN_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['admin1@fitfriendster.com', 'admin2@fitfriendster.com']
+
+
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
