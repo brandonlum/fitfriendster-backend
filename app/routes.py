@@ -76,7 +76,7 @@ def user(username):
     #     {'author': user, 'body': 'Test Post 1'},
     #     {'author': user, 'body': 'Test Post 2'}
     # ]
-    posts = Post.query.filter_by(user_id=user.id)
+    posts = Post.query.filter_by(user_id=user.id).all()
     return render_template('user.html', title='Profile', user=user, posts=posts)
 
 
@@ -101,10 +101,12 @@ def edit_profile():
 def new_post():
     form = NewPostForm()
     if form.validate_on_submit():
-        title = form.title.data
-        body = form.body.data
-        user_id = current_user.id
-        author = current_user.username
+        new_post = Post(
+            title = form.title.data, 
+            body = form.body.data,
+            user_id = current_user.id
+        )
+        db.session.add(new_post)
         db.session.commit()
         flash('Created new post')
         return redirect(url_for('index'))
