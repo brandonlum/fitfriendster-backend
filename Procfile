@@ -1,1 +1,1 @@
-web: flask db upgrade; flask translate compile; gunicorn fitfriendster:app
+web: flask db upgrade; flask translate compile; gunicorn fitfriendster-backend:app
