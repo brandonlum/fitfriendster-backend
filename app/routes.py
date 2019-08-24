@@ -11,16 +11,6 @@ from datetime import datetime
 @login_required
 
 def index():
-    # posts = [
-    #     {
-    #         'author': {'username': 'John'},
-    #         'body': 'Beautiful day in Portland!'
-    #     },
-    #     {
-    #         'author': {'username': 'Susan'},
-    #         'body': 'The Avengers movie was so cool!'
-    #     }
-    # ]
     posts = Post.query.all()
     return render_template('index.html', title="Home-Page", posts=posts)
 
