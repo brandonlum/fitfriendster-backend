@@ -5,3 +5,13 @@
 /* .card {
     border: 1px solid black
 } */
+
+body {
+    background-color: rgba(238, 238, 238, 0.5) !important;
+    background-image: url("https://lh3.googleusercontent.com/Ye6KQ9ZykEWM-KRvGyFK4bJw46YjSk3ykM5nRfwChkEk9jco4NYzXyqyN1JLaJiIGfjFiJW2th52w0a344A8gSdGn49mt-i4GEcqtk34yJnVduKogmziRuLRVTdMDJmgDkRVRheBpis=w2132-h1600-no");
+    background-blend-mode: color;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 1000px;
+    overflow: scroll;
+}

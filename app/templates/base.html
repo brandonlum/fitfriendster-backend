@@ -14,33 +14,34 @@
             </title>
         {% endif %}
     {% endblock %}
-
-    {% block navbar %}
-        <nav class="nav navbar navbar-default d-flex">
-            <h1><a class="text-decoration-none text-dark" href='/'>Fit Friendster</a></h1>
-            <a class="btn btn-border" href="{{ url_for('index') }}">Home</a>
-            {% if current_user.is_anonymous %}
-                <a class="btn btn-border" href="{{ url_for('login') }}">Login</a>
-                <a class="nav-link" href="{{ url_for('register') }}">Register</a>
-            {% else %}
-                <a class="btn" href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-                <a class="btn" href="{{ url_for('new_post') }}">New Post</a>
-                <a class="btn" href="{{ url_for('logout') }}">Logout</a>
-            {% endif %}
-        </nav>
-    {% endblock %}
-    {% block content %}
-        <div class="container">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <div class="alert alert-info">{{ message }}</div>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
-            {% block app_content %} {% endblock %}
-        </div>
-    {% endblock %}
+    <body>
+        {% block navbar %}
+            <nav class="nav navbar navbar-default d-flex">
+                <h1><a class="text-decoration-none text-dark" href='/'>Fit Friendster</a></h1>
+                <a class="btn btn-border" href="{{ url_for('index') }}">Home</a>
+                {% if current_user.is_anonymous %}
+                    <a class="btn btn-border" href="{{ url_for('login') }}">Login</a>
+                    <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                {% else %}
+                    <a class="btn" href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+                    <a class="btn" href="{{ url_for('new_post') }}">New Post</a>
+                    <a class="btn" href="{{ url_for('logout') }}">Logout</a>
+                {% endif %}
+            </nav>
+        {% endblock %}
+        {% block content %}
+            <div class="container">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <div class="alert alert-info">{{ message }}</div>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                {% block app_content %} {% endblock %}
+            </div>
+        {% endblock %}
+    </body>
 </html>
