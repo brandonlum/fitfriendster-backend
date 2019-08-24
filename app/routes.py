@@ -77,7 +77,7 @@ def user(username):
     #     {'author': user, 'body': 'Test Post 2'}
     # ]
     posts = Post.query.filter_by(user_id=user.id)
-    return render_template('user.html', user=user, posts=posts)
+    return render_template('user.html', title='Profile', user=user, posts=posts)
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
